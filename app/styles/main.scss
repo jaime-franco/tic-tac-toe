@@ -1,9 +1,9 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
 @import "board.scss";
 @import "font-awesome/font-awesome.scss";
-// endbower
 
 body{
 	background-color: #4E4C5F;
