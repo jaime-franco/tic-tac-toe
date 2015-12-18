@@ -1,7 +1,22 @@
-<div class="board-container" >
-	<div class="board-colum" ng-class="'cell-' + dimension" ng-repeat="row in board track by $index">
-		<div ng-click="onCellPress($parent.$index,$index)" class="board-cell" ng-class="'cell-' + dimension" ng-repeat="col in row track by $index">
-			<i ng-class="{'fa fa-times' : col == 'x' , 'fa fa-circle-o' : col == 'o'}"></i>
-		<div>
+<div ng-click="gameReady = true"ng-show="!gameReady">
+	play
+</div>
+<div class="animate" ng-show="gameReady">
+	<div class="row">
+		<div class="player-card">
+			<img class="avatar" ng-src="{{actualPlayer.avatar}}"></img>
+			<div class="info">
+				<label class="name"> {{actualPlayer.name}}</label>
+				<lable class="message"> {{userMessage}} </lable>
+			</div>
+		</div>
+		
+	</div>
+	<div class="board-container" >
+		<div class="board-colum" ng-class="'cell-' + dimension" ng-repeat="row in board track by $index">
+			<div ng-click="onCellPress($parent.$index,$index)" class="board-cell" ng-class="'cell-' + dimension" ng-repeat="col in row track by $index">
+				<i ng-class="{'fa fa-times' : col == 'x' , 'fa fa-circle-o' : col == 'o'}"></i>
+			<div>
+		</div>
 	</div>
 </div>

@@ -9,40 +9,59 @@
  */
 angular.module('ticTacToeApp')
   .controller('GameCtrl', ['$scope',function ($scope) {
+    //Private variables
+    var gameOver = false;
     
-    //Initializing variables
-    $scope.board = null;
-    $scope.players =[{
-        symbol : 'x'
+    var players =[{
+        symbol : 'x',
+        name : 'Player 1',
+        avatar : '/images/4330.jpg'
       },{
-        symbol : 'o'
+        symbol : 'o',
+        name : 'Player 2',
+        avatar : '/images/7440.jpg'
       }];
+    var usedCells = 0;
+    //Initializing variables
+    $scope.gameReady = false;
+    $scope.board = null;  
     $scope.playerTurn = 0;
-    $scope.inLine = 0;
-    $scope.dimension =10;
-   
+    $scope.inLine = 3;
+    $scope.dimension =3;
+    $scope.actualPlayer = players[0];
+    $scope.userMessage = "it's your turn!";
     /**
     * On User clicks the field
     * @param x The x position
     * @param y The y position 
     */
     $scope.onCellPress = function(x,y){
+        if(gameOver) return;
         if($scope.board[x][y] === '-'){
-          $scope.board[x][y] = $scope.players[$scope.playerTurn].symbol;
+          $scope.board[x][y] = players[$scope.playerTurn].symbol;
           if(winMove($scope.board,{x : x, y : y},$scope.inLine)) {
-            alert("Player " + $scope.playerTurn + "won");
+            $scope.userMessage = "WON";
+            gameOver = true;
           }else {
+            usedCells++;
+            if(usedCells == $scope.dimension * $scope.dimension){
+              gameOver = true;
+              $scope.userMessage = "TIE" 
+            }
             nextPlayerTurn();
           }
         }
     };
-    
+    /**
+    * Set next player logic
+    */
     function nextPlayerTurn(){
       if ($scope.playerTurn === 0){
         $scope.playerTurn = 1;
       }else {
         $scope.playerTurn = 0;
       }
+       $scope.actualPlayer = players[$scope.playerTurn];
     }
     
     /**
@@ -54,7 +73,6 @@ angular.module('ticTacToeApp')
     */
     function init(){
       $scope.board = createBoard( $scope.dimension,'-');
-      $scope.inLine = 3;
     }
     /**
     * Check if the move in the postion x,y is a winner move or not
@@ -66,7 +84,7 @@ angular.module('ticTacToeApp')
     //TODO : Clean Code
     function winMove(board,position,inLine){
       var dimension = board.length;
-      var col = 0, diagL = 0, diagR, row =0;
+      var col = 0, diagL = 0, diagR = 0, row = 0;
       var symbol = board[position.x][position.y];
       var leftX= 0 , rightX = 0;
       
@@ -93,7 +111,8 @@ angular.module('ticTacToeApp')
             diagL =0;
           }
         }
-        rightX = dimension  - leftX;
+        //Rigth diagonal
+        rightX = dimension  - i + position.x - 1;
         if(rightX >= 0 && rightX < dimension){
           if(board[rightX][i]===symbol){
             diagR++;

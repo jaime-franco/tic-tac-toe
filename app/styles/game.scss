@@ -1,0 +1,22 @@
+@import "compass/css3";
+
+.player-card {
+	width: 128px;
+	text-align: center;
+	.avatar{
+		width:92px;
+		height: 92px;
+		border:5px solid white;
+		@include border-radius(50%,50%); 
+	}
+	.info{
+		.name {
+			font-size: 20px;
+			color: white;
+			width: 100%;
+		}
+		.message {
+			color: #F8E71C;
+		}
+	}
+}
