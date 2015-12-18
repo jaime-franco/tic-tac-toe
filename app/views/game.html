@@ -1,0 +1,5 @@
+<div class="board-colum" ng-repeat="row in board track by $index">
+	<div ng-click="onCellPress($parent.$index,$index)" class="board-cell"  ng-repeat="col in row track by $index">
+		{{col}} 
+	<div>
+</div>
