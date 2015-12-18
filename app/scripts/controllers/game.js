@@ -19,7 +19,7 @@ angular.module('ticTacToeApp')
       }];
     $scope.playerTurn = 0;
     $scope.inLine = 0;
-    
+    $scope.dimension =10;
    
     /**
     * On User clicks the field
@@ -53,7 +53,7 @@ angular.module('ticTacToeApp')
     * @return {Boolean} True if move was a winner one , false if not
     */
     function init(){
-      $scope.board = createBoard(3,'-');
+      $scope.board = createBoard( $scope.dimension,'-');
       $scope.inLine = 3;
     }
     /**

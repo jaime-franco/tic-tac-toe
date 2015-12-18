@@ -1,5 +1,7 @@
-<div class="board-colum" ng-repeat="row in board track by $index">
-	<div ng-click="onCellPress($parent.$index,$index)" class="board-cell"  ng-repeat="col in row track by $index">
-		{{col}} 
-	<div>
+<div class="board-container" >
+	<div class="board-colum" ng-class="'cell-' + dimension" ng-repeat="row in board track by $index">
+		<div ng-click="onCellPress($parent.$index,$index)" class="board-cell" ng-class="'cell-' + dimension" ng-repeat="col in row track by $index">
+			<i ng-class="{'fa fa-times' : col == 'x' , 'fa fa-circle-o' : col == 'o'}"></i>
+		<div>
+	</div>
 </div>
