@@ -27,6 +27,13 @@
   }
 }
 
+.option-container{
+  .btn-primary{
+		width: 120px;
+		margin-bottom: 10px;
+	}
+}
+
 .board-colum{
   float: left;
   @for $i from 3 through 10 {
@@ -41,87 +48,40 @@
   display: inline-block;
 }
 
-.animate {
-  &.ng-hide-add  { 
-    animation:0.5s lightSpeedOut ease; 
-  }
+.animate-in {
   &.ng-hide-remove { 
     animation:0.5s bounceIn linear; 
-  }
-
+  } 
 }
 
-
-.animated.bounceOut {
-  -webkit-animation-duration: .75s;
-  animation-duration: .75s;
+.animate-out{
+  &.ng-hide-add  { 
+    animation:0.5s bounceOut ease; 
+  } 
 }
-/* ANIMATIONS (FROM ANIMATE.CSS) ======================== */
-/* flip in */
-@keyframes flipInX {
-  0% {
-    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-    transition-timing-function: ease-in;
-    opacity: 0;
+/* ANIMATIONS (FROM ANIMATE.CSS)  */
+
+/* bounceOut */
+@keyframes bounceOut {
+  20% {
+    -webkit-transform: scale3d(.9, .9, .9);
+    transform: scale3d(.9, .9, .9);
   }
 
-  40% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-    transition-timing-function: ease-in;
-    transition-timing-function: ease-in;
-  }
-
-  60% {
-    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+  50%, 55% {
     opacity: 1;
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.1, 1.1, 1.1);
   }
 
-  80% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-  }
-
-  100% {
-    transform: perspective(400px);
-    transform: perspective(400px);
-    transform: perspective(400px);
-  }
-}
-
-/* light speed out */
-@keyframes lightSpeedOut {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate3d(100%, 0, 0) skewX(30deg);
-    transform: translate3d(100%, 0, 0) skewX(30deg);
+  to {
     opacity: 0;
-  }
-}
-
-@keyframes lightSpeedOut {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate3d(100%, 0, 0) skewX(30deg);
-    transform: translate3d(100%, 0, 0) skewX(30deg);
-    transform: translate3d(100%, 0, 0) skewX(30deg);
-    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
   }
 }
 
 /* bounceIn */
-
-
 @keyframes bounceIn {
   from, 20%, 40%, 60%, 80%, to {
     -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);

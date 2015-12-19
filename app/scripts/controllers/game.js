@@ -22,31 +22,73 @@ angular.module('ticTacToeApp')
         avatar : '/images/7440.jpg'
       }];
     var usedCells = 0;
+    var inLine = 0;
+    var dimension = 0;
     //Initializing variables
     $scope.gameReady = false;
     $scope.board = null;  
     $scope.playerTurn = 0;
-    $scope.inLine = 3;
-    $scope.dimension =3;
+    $scope.dimension  = 0;
     $scope.actualPlayer = players[0];
-    $scope.userMessage = "it's your turn!";
+    $scope.userMessage = 'it\'s your turn!';
+    $scope.showOptions = false;
+    
+    var gridSizes = [];
+    for(var i = 3 ; i <=10;i++){
+      gridSizes.push({
+        name : i + 'x' + i,
+        value   : i
+      });
+    }
+    
+    $scope.gridSizes = gridSizes;
+    $scope.inLineList = [{
+      name : 3,
+      value : 3,
+    }];
+    
+    $scope.gridSize = {};
+    $scope.inLine = {};
+    /**
+    * Generate the list of possible parameter for the inline depending the size of the grid
+    */
+    $scope.generateInLine = function(){
+      var size = $scope.gridSize.value;
+      console.log($scope.gridSize);
+      $scope.inLineList = [];
+      for (var i = 3; i <= size;i++){
+        $scope.inLineList.push({
+          name : i,
+          value : i
+        });
+      }
+      $scope.inLine = $scope.inLineList[0];
+    };
+    
+    $scope.showSelectGameMode = function(){
+      $scope.gameReady = false;
+      $scope.showOptions = false;
+    };
     /**
     * On User clicks the field
     * @param x The x position
     * @param y The y position 
     */
     $scope.onCellPress = function(x,y){
-        if(gameOver) return;
+        if(gameOver) { return; }
         if($scope.board[x][y] === '-'){
           $scope.board[x][y] = players[$scope.playerTurn].symbol;
-          if(winMove($scope.board,{x : x, y : y},$scope.inLine)) {
-            $scope.userMessage = "WON";
+          console.log(inLine);
+          if(winMove($scope.board,{x : x, y : y},inLine)) {
+            $scope.userMessage = 'WON';
             gameOver = true;
+            $scope.showOptions = true;
           }else {
             usedCells++;
-            if(usedCells == $scope.dimension * $scope.dimension){
+            if(usedCells === dimension * dimension){
               gameOver = true;
-              $scope.userMessage = "TIE" 
+              $scope.userMessage = 'TIE';
+              $scope.showOptions = true;
             }
             nextPlayerTurn();
           }
@@ -71,18 +113,31 @@ angular.module('ticTacToeApp')
     * @param inLine Number of symbols that should be consecutive to win
     * @return {Boolean} True if move was a winner one , false if not
     */
-    function init(){
-      $scope.board = createBoard( $scope.dimension,'-');
-    }
+    $scope.init = function init(){
+      dimension = $scope.gridSize.value;
+      inLine    = $scope.inLine.value;
+      console.log(dimension);
+      console.log(inLine);
+      $scope.board = createBoard( dimension,'-');
+      //Clear values
+      usedCells = 0;
+      gameOver  = false;
+      $scope.gameReady = true;
+      $scope.playerTurn = 0;
+      $scope.dimension  = dimension;
+      $scope.showOptions = false;
+      $scope.actualPlayer = players[0];
+      $scope.userMessage = 'it\'s your turn!';
+    };
     /**
     * Check if the move in the postion x,y is a winner move or not
     * @param board The board
     * @param position The cordanate of the move in x,y
-    * @param inLine Number of symbols that should be consecutive to win
+    * @param min Number of symbols that should be consecutive to win
     * @return {Boolean} True if move was a winner one , false if not
     */
     //TODO : Clean Code
-    function winMove(board,position,inLine){
+    function winMove(board,position,min){
       var dimension = board.length;
       var col = 0, diagL = 0, diagR = 0, row = 0;
       var symbol = board[position.x][position.y];
@@ -92,13 +147,13 @@ angular.module('ticTacToeApp')
         //Checking colum
         if(board[position.x][i] === symbol) {
           col++;
-        } else if(col !== inLine){
+        } else if(col < min){
           col = 0;
         }
         //Checking Row
         if(board[i][position.y] === symbol) {
           row++;
-        } else  if(row !== inLine){
+        } else  if(row < min){
           row = 0;
         }
         //move the x position for the diagonals
@@ -107,23 +162,23 @@ angular.module('ticTacToeApp')
         if(leftX >= 0 && leftX < dimension){
           if(board[leftX][i] === symbol){
             diagL++;
-          }else if(diagL !== inLine){
+          }else if(diagL < min){
             diagL =0;
           }
         }
         //Rigth diagonal
-        rightX = dimension  - i + position.x - 1;
+        rightX = position.x + position.y - i;
         if(rightX >= 0 && rightX < dimension){
           if(board[rightX][i]===symbol){
             diagR++;
-          }else if(diagR !== inLine){
+          }else if(diagR < min){
             diagR =0;
           }
         }
       }
       
       //Return if one of the results is equal to the needed for win the game
-      return col === inLine || row === inLine || diagL === inLine || diagR ===inLine;
+      return col >= min || row >= min || diagL >= min || diagR  >= min;
     }
     /**
     * Create a Array of Arrays for simulate the board
@@ -142,5 +197,5 @@ angular.module('ticTacToeApp')
       return board;
     }
     
-     init();
+     
   }]);

@@ -1,7 +1,21 @@
-<div ng-click="gameReady = true"ng-show="!gameReady">
-	play
+<div class="game-select animate-in" ng-show="!gameReady" class="row">
+	<h1>Select your game mode</h1>
+	<form>
+		<div  class="form-group">
+			<label>Grid Size: </label>
+			<select id="gridSize" class="form-control" ng-init="gridSize = gridSizes[0]" ng-model="gridSize" ng-options="option.name for option in gridSizes"  ng-change="generateInLine()">
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="exampleInputEmail2">In line to win: </label>
+			<select id="inLine" class="form-control" ng-init="inLine = inLineList[0]" ng-model="inLine" ng-options="option.name for option in inLineList">
+			</select>
+	
+		</div>
+		<button type="submit" class="btn btn-primary " ng-click="init()">Start</button>
+	</form>
 </div>
-<div class="animate" ng-show="gameReady">
+<div class="animate-in game-container" ng-show="gameReady">
 	<div class="row">
 		<div class="player-card">
 			<img class="avatar" ng-src="{{actualPlayer.avatar}}"></img>
@@ -10,7 +24,10 @@
 				<lable class="message"> {{userMessage}} </lable>
 			</div>
 		</div>
-		
+		<div class="option-container animate-in animate-out" ng-show="showOptions">
+			<button type="submit" class="btn btn-primary " ng-click="showSelectGameMode()">New Game</button><br/>
+			<button type="submit" class="btn btn-primary " ng-click="init()">Restart</button>
+		</div>
 	</div>
 	<div class="board-container" >
 		<div class="board-colum" ng-class="'cell-' + dimension" ng-repeat="row in board track by $index">
