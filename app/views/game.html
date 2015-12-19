@@ -17,16 +17,22 @@
 </div>
 <div class="animate-in game-container" ng-show="gameReady">
 	<div class="row">
-		<div class="player-card">
-			<img class="avatar" ng-src="{{actualPlayer.avatar}}"></img>
-			<div class="info">
-				<label class="name"> {{actualPlayer.name}}</label>
-				<lable class="message"> {{userMessage}} </lable>
+		<div class="player-container">
+			<div class="score">
+				<i class="fa fa-trophy"></i>
+				{{playerOneScore}} - {{playerTwoScore}}
+			</div>
+			<div class="player-card">
+				<img class="avatar" ng-src="{{actualPlayer.avatar}}"></img>
+				<div class="info">
+					<label class="name"> {{actualPlayer.name}}</label>
+					<lable class="message"> {{userMessage}} </lable>
+				</div>
 			</div>
 		</div>
 		<div class="option-container animate-in animate-out" ng-show="showOptions">
 			<button type="submit" class="btn btn-primary " ng-click="showSelectGameMode()">New Game</button><br/>
-			<button type="submit" class="btn btn-primary " ng-click="init()">Restart</button>
+			<button type="submit" class="btn btn-primary " ng-click="init()">Rematch</button>
 		</div>
 	</div>
 	<div class="board-container" >

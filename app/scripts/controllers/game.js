@@ -32,6 +32,8 @@ angular.module('ticTacToeApp')
     $scope.actualPlayer = players[0];
     $scope.userMessage = 'it\'s your turn!';
     $scope.showOptions = false;
+    $scope.playerOneScore = 0;
+    $scope.playerTwoScore = 0;
     
     var gridSizes = [];
     for(var i = 3 ; i <=10;i++){
@@ -68,6 +70,8 @@ angular.module('ticTacToeApp')
     $scope.showSelectGameMode = function(){
       $scope.gameReady = false;
       $scope.showOptions = false;
+      $scope.playerOneScore = 0;
+      $scope.playerTwoScore = 0;
     };
     /**
     * On User clicks the field
@@ -81,6 +85,11 @@ angular.module('ticTacToeApp')
           console.log(inLine);
           if(winMove($scope.board,{x : x, y : y},inLine)) {
             $scope.userMessage = 'WON';
+            if($scope.playerTurn === 0 ) {
+              $scope.playerOneScore++;
+            }else {
+              $scope.playerTwoScore++;
+            }
             gameOver = true;
             $scope.showOptions = true;
           }else {

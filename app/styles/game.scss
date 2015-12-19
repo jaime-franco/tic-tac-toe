@@ -5,7 +5,7 @@
     background: #3F3D52;
     text-align: center;
 	padding-top: 10px;
-    width: 450px;
+    max-width: 450px;
     border-radius: 10px 10px;
     margin: 30px auto 0 auto;
 	padding-bottom: 20px;
@@ -18,25 +18,43 @@
 		margin: 0 auto;
 	}
 }
-.player-card {
-	width: 128px;
-	text-align: center;
-	display: inline-block;
-	margin: 10px 0 10px 0;
-	.avatar{
-		width:92px;
-		height: 92px;
-		border:5px solid white;
-		@include border-radius(50%,50%); 
-	}
-	.info{
-		.name {
-			font-size: 20px;
+.player-container {
+    display: inline-block;
+	width: 400px;
+    position: relative;	
+	.score{
+		position: absolute;
+		float: left;
+		top : 10px;
+		font-size: 30px;
+    	color: white;
+		.fa-trophy {
+			font-size: 30px;
+    		padding-left: 30px;
 			color: white;
-			width: 100%;
 		}
-		.message {
-			color: #F8E71C;
+		
+	}	
+	.player-card {
+		width: 128px;
+		text-align: center;
+		display: inline-block;
+		margin: 10px 0 10px 0;
+		.avatar{
+			width:92px;
+			height: 92px;
+			border:5px solid white;
+			@include border-radius(50%,50%); 
+		}
+		.info{
+			.name {
+				font-size: 20px;
+				color: white;
+				width: 100%;
+			}
+			.message {
+				color: #F8E71C;
+			}
 		}
 	}
 }
@@ -44,4 +62,3 @@
 .game-container {
 	text-align: center;	
 }
-
