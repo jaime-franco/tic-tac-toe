@@ -15,11 +15,11 @@ angular.module('ticTacToeApp')
     var players =[{
         symbol : 'x',
         name : 'Player 1',
-        avatar : '/images/4330.jpg'
+        avatar : 'images/4330.jpg'
       },{
         symbol : 'o',
         name : 'Player 2',
-        avatar : '/images/7440.jpg'
+        avatar : 'images/7440.jpg'
       }];
     var usedCells = 0;
     var inLine = 0;
