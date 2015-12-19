@@ -18,10 +18,18 @@
 <div class="animate-in game-container" ng-show="gameReady">
 	<div class="row">
 		<div class="player-container">
-			<div class="score">
+			<div class="top-left">
+				<div class="back" ng-click="showSelectGameMode()">
+					<i class="fa fa-chevron-left"></i> 
+					Back
+				</div>
+				<div class="score">
+				
 				<i class="fa fa-trophy"></i>
-				{{playerOneScore}} - {{playerTwoScore}}
+					{{playerOneScore}} - {{playerTwoScore}}
+				</div>
 			</div>
+			
 			<div class="player-card">
 				<img class="avatar" ng-src="{{actualPlayer.avatar}}"></img>
 				<div class="info">

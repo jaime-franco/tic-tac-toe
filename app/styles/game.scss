@@ -22,19 +22,36 @@
     display: inline-block;
 	width: 400px;
     position: relative;	
-	.score{
+	
+	.top-left{
 		position: absolute;
 		float: left;
-		top : 10px;
-		font-size: 30px;
-    	color: white;
-		.fa-trophy {
-			font-size: 30px;
-    		padding-left: 30px;
-			color: white;
+		top : 4px;
+		font-size: 20px;
+		color: white;
+		.back{
+			.fa-chevron-left {
+				padding-left: 30px;
+				color: white;
+			}
 		}
+		.score{
+			padding-top: 20px;
+			.fa-trophy {
+				font-size: 30px;
+				padding-left: 40px;
+				color: white;
+			}
+		}	
+	}
+	.top-rigth{
+		position: absolute;
+		float: right;
+		top : 2px;
+		font-size: 30px;
+		color: white;
 		
-	}	
+	}
 	.player-card {
 		width: 128px;
 		text-align: center;
